@@ -1,30 +1,49 @@
 #include <Adafruit_NeoPixel.h>
 
-#define PIN D1            // D1 pin on Wemos D1 Mini
-#define NUMPIXELS 12      // 12 LEDs in the NeoPixel ring
+#define PIN D1
+#define NUMPIXELS 12
 
 Adafruit_NeoPixel ring(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
+const uint32_t CO2_COLOR = ring.Color(100, 0, 0);
+const uint32_t HUMIDITY_COLOR = ring.Color(0, 0, 100);
+
 void setup() {
-  ring.begin();           // Initialize NeoPixel
-  ring.show();            // Turn off all LEDs initially
+  ring.begin();
+  ring.show(); // turn all leds off initially
+
+  displayCO2(3);
+  displayHumidity(5);
 }
 
 void loop() {
-  // Loop through each LED and light it red
-  for (int i = 0; i < NUMPIXELS; i++) {
-    ring.clear();                   // Clear previous state
-    ring.setPixelColor(i, ring.Color(255, 0, 0)); // Red
-    ring.show();                    // Update LEDs
-    delay(100);                     // Wait a bit
+  
+}
+
+void displayCO2 (double value){
+  int ledsToShow = value; // TODO: translate here from value (CO2 concentration) to leds (how many should turn on)
+
+  if (ledsToShow > NUMPIXELS / 2) {
+    ledsToShow = NUMPIXELS / 2;
+  }
+  
+  for (int i = 0; i < ledsToShow; i++) {
+    ring.setPixelColor(i, CO2_COLOR);
   }
 
-  // Rainbow animation
-  for (int j = 0; j < 256; j++) {
-    for (int i = 0; i < NUMPIXELS; i++) {
-      ring.setPixelColor(i, ring.ColorHSV((i * 65536 / NUMPIXELS + j * 256) % 65536));
-    }
-    ring.show();
-    delay(20);
+  ring.show();
+}
+
+void displayHumidity (double value){
+  int ledsToShow = value; // TODO: translate here from value (humidity) to leds (how many should turn on)
+
+  if (ledsToShow > NUMPIXELS / 2) {
+    ledsToShow = NUMPIXELS / 2;
   }
+  
+  for (int i = NUMPIXELS - 1; i > NUMPIXELS - ledsToShow - 1; i--) {
+    ring.setPixelColor(i, HUMIDITY_COLOR);
+  }
+
+  ring.show();
 }
