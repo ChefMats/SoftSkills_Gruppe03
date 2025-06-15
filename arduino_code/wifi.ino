@@ -1,16 +1,5 @@
-
-//Hier deine Daten eintragen:
-const char* ssid = "DEIN_WIFI_NAME";
-const char* password = "DEIN_PASSWORT";
-
-
-
-
-
-
-
-
-
+#include <WiFi.h>
+#include "config.h"
 
 void connectWiFi() {
   Serial.println("Verbinden...");
@@ -24,10 +13,10 @@ void connectWiFi() {
   }
 
   if (WiFi.status() == WL_CONNECTED) {
-    Serial.println("\n Verbunden!");
+    Serial.println("\nVerbunden!");
     Serial.print("IP-Adresse: ");
     Serial.println(WiFi.localIP());
   } else {
-    Serial.println("\n Verbindung fehlgeschlagen.");
+    Serial.println("\nVerbindung fehlgeschlagen.");
   }
 }

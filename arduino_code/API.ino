@@ -1,14 +1,12 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include "config.h"
+#include "notification.ino" 
 
 
 void fetchWeatherData() {
   HTTPClient http;
-  http.begin("http://wttr.in/Oldenburg?format=j1");  // !!! Hier deinen Stadtnamen !!!
-
-
-
-
+  http.begin(apiURL);  
 
   int httpCode = http.GET();
 
@@ -29,6 +27,7 @@ void fetchWeatherData() {
       Serial.print(humidity);
       Serial.print(" % ");
       Serial.println(weatherDesc);
+      notifyOutsideData(tempC, humidity, weatherDesc);
     } else {
       Serial.println("JSON Fehler");
     }
