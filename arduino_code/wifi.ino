@@ -1,5 +1,6 @@
-#include <WiFi.h>
 #include "config.h"
+#include <WiFi.h>
+
 
 void connectWiFi() {
   Serial.println("Verbinden...");
