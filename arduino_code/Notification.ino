@@ -1,4 +1,4 @@
-#include <Blynk.h>
+#include <BlynkSimpleEsp32.h>  
 #include "config.h"
 
 //draußen daten
