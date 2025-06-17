@@ -13,7 +13,7 @@ void initializeLeds(){
   ring.show(); // turn all leds off initially
 }
 
-void displayCO2 (double value){
+void displayCO2 (float value){
   int ledsToShow = value; // TODO: translate here from value (CO2 concentration) to leds (how many should turn on)
 
   if (ledsToShow > NUMPIXELS / 2) {
@@ -27,7 +27,7 @@ void displayCO2 (double value){
   ring.show();
 }
 
-void displayHumidity (double value){
+void displayHumidity (float value){
   int ledsToShow = value; // TODO: translate here from value (humidity) to leds (how many should turn on)
 
   if (ledsToShow > NUMPIXELS / 2) {
