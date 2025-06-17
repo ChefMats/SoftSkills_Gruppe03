@@ -1,6 +1,7 @@
+#include "config.h"    
 #include <WiFi.h>                
 #include <BlynkSimpleEsp32.h>    
-#include "config.h"               
+           
 
 
 void setup() {

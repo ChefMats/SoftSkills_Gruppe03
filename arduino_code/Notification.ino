@@ -1,5 +1,7 @@
-#include <BlynkSimpleEsp32.h>  
+
 #include "config.h"
+#include <BlynkSimpleEsp32.h>  
+
 
 //draußen daten
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
