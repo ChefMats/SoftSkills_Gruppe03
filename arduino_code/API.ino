@@ -3,7 +3,6 @@
 #include <ESP8266HTTPClient.h>
 #include <ArduinoJson.h>
 
-
 void fetchWeatherData() {
   WiFiClient client;
   if (WiFi.status() != WL_CONNECTED) {
@@ -37,7 +36,7 @@ void fetchWeatherData() {
       Serial.print(" % | Wetter: ");
       Serial.println(weatherDesc);
 
-      notifyOutsideData(tempC, humidity, weatherDesc);  // Deine eigene Benachrichtigung
+      notifyOutsideData(tempC, humidity, weatherDesc);
     } else {
       Serial.println("JSON Fehler");
     }

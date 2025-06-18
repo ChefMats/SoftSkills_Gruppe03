@@ -1,7 +1,6 @@
 #include "config.h"
 #include <ESP8266WiFi.h>
 
-
 void connectWiFi() {
   Serial.println("Verbinden...");
   WiFi.begin(ssid, password);
