@@ -5,6 +5,7 @@
 
 
 void fetchWeatherData() {
+  WiFiClient client;
   if (WiFi.status() != WL_CONNECTED) {
     Serial.println("Nicht mit WiFi verbunden – Wetterdaten werden nicht abgerufen.");
     return;
@@ -14,7 +15,7 @@ void fetchWeatherData() {
                + "&appid=" + String(owm_api_key) + "&units=metric&lang=de";
 
   HTTPClient http;
-  http.begin(url); 
+  http.begin(client, url); 
 
   int httpCode = http.GET();
 
