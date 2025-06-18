@@ -4,13 +4,13 @@
 // ------------------------
 // WLAN-Zugangsdaten
 // ------------------------
-const char* ssid = "DEIN_WIFI_NAME";
-const char* password = "DEIN_PASSWORT";
+const char* ssid = "iPhone von Nico";
+const char* password = "testtest";
 
 // ------------------------
 // API-URL für Wetterdaten
 // ------------------------
-const char* apiURL = "http://wttr.in/Oldenburg?format=j1";
+const char* apiURL = "https://wttr.in/Oldenburg?format=j1";
 
 // ------------------------
 // Blynk-Konfiguration (für Handy-Benachrichtigungen)

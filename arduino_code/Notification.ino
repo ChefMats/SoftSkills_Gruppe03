@@ -1,6 +1,6 @@
 
 #include "config.h"
-#include <BlynkSimpleEsp32.h>  
+#include <BlynkSimpleEsp8266.h>  
 
 
 //draußen daten

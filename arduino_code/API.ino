@@ -1,19 +1,21 @@
 #include "config.h"  
-#include <WiFi.h>         
-#include <HTTPClient.h>  
+#include <ESP8266WiFi.h>
+#include <ESP8266HTTPClient.h>  
 #include <ArduinoJson.h>  
      
-
-
-
 void fetchWeatherData() {
   HTTPClient http;
-  http.begin(apiURL);  
+  WiFiClientSecure client;
+  client.setInsecure();
+  http.begin(client, apiURL);
+  http.addHeader("User-Agent", "Mozilla/5.0");
 
   int httpCode = http.GET();
 
   if (httpCode == 200) {
     String payload = http.getString();
+
+    Serial.println(payload);
 
     StaticJsonDocument<2048> doc;
     DeserializationError error = deserializeJson(doc, payload);
