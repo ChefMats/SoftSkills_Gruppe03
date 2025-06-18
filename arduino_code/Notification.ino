@@ -5,8 +5,6 @@
 
 //draußen daten
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
-  Serial.println("Blynk Benachrichtigung Draußen");
-
   if (humidity > 80 && tempC < 20) {
     Blynk.logEvent("lueften", "Draußen ist es kühl & feucht – besser nicht lüften.");
   } else if (humidity < 60 && tempC < 24) {

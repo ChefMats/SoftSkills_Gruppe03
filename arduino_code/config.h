@@ -8,9 +8,11 @@ const char* ssid = "iPhone von Nico";
 const char* password = "testtest";
 
 // ------------------------
-// API-URL für Wetterdaten
+// Wetterdaten
 // ------------------------
-const char* apiURL = "https://wttr.in/Oldenburg?format=j1";
+const char* owm_api_key = "68fcded7c5861174eae27c86c2676ad2";  // <- von OpenWeatherMap
+const char* city = "Oldenburg";
+const char* country_code = "de";
 
 // ------------------------
 // Blynk-Konfiguration (für Handy-Benachrichtigungen)
