@@ -1,18 +1,20 @@
-#include "config.h"    
-#include <WiFi.h>                
-#include <BlynkSimpleEsp32.h>    
-           
-
+#include "config.h"
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
 
 void setup() {
   Serial.begin(115200);
-  initializeLeds();
-  displayCO2(2);
-  displayHumidity(6);
-  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+  connectWiFi();
 
+  initializeLeds();
+
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
 }
 
 void loop() {
-  Blynk.run(); 
+  Blynk.run();
+
+  fetchWeatherData();
+  
+  delay(1000);
 }
