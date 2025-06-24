@@ -4,19 +4,19 @@
 
 void setup() {
   Serial.begin(115200);
-  //connectWiFi();
+  connectWiFi();
 
   initializeLeds();
 
-  //Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+  initializeSensors();
+
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
 }
 
 void loop() {
-  //Blynk.run();
+  Blynk.run();
 
-  //fetchWeatherData();
+  fetchWeatherData();
   
-  readCO2();
-
   delay(1000);
 }
