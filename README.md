@@ -1,3 +1,6 @@
 # Smart AirBuddy
 
-Dieser Git dient für das Projekt der Gruppe 03 in dem Modul Soft Skills an der Carl von Ossietzky Universität Oldenburg.
+Das Projekt Smart Airbuddy ist ein im Rahmen des Sommersemester 2025 entstandenes Semesterprojekt.
+Ziel war es, ein technisches System zu entwickeln, das aktiv zu Verbesserung der Raumluftqualität
+beiträgt und dabei ein **Nachhaltigkeitsziel** unterstützt: **Ziel 3 Gesundheit und Wohlergehen.**
+
