@@ -17,3 +17,14 @@ void playAlert(int frequency){ // frequency in hz
   delay(100);
   playTone(frequency, 50);
 }
+
+void playCDur(){
+  playTone(264, 500);
+  playTone(297, 500);
+  playTone(330, 500);
+  playTone(352, 500);
+  playTone(396, 500);
+  playTone(440, 500);
+  playTone(495, 500);
+  playTone(528, 500);
+}
