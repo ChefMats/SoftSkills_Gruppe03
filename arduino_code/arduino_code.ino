@@ -8,6 +8,8 @@ void setup() {
 
   initializeLeds();
 
+  initializeSensors();
+
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
 }
 
