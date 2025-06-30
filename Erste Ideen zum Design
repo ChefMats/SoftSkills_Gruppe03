@@ -1,0 +1,11 @@
+Zu Beginn des Projektes waren wir uns zunächst unsicher, wie unser Projekt am Ende aussehen sollte. Wir waren uns aber über folgendes eingig:
+  - Wir möchten eine Art Display oder visuelles Feedback
+  - Unser Projekt soll hausaltsüblich wirken, von daher wird das Design wahrscheinlich eher kompakter
+  - Wir möchten Luftsensoren verwenden für Innenräume verwenden, aber auch über Internetzugang zusätzliche Daten über Luftqualität erhalten
+  - Es sollen Signaltöne über einen Lautsprecher ausgegeben werden
+Unter all diesen Gesichtspunkten fanden wir den "retro PC" am Besten.
+
+Das heißt der Fuß des Körpers ist optisch etwas kleiner, aber solide und rückt in den Hintergrund.
+Die Vorderseite soll das "Gesicht" des SmartAirBuddys sein, d.h. Der LED-Ring wird vorne angebracht und 
+aus Gründen der Zweckmäßigkeit haben wir auch unseren An-/Ausknopf an die Vorderseite gebracht.
+Somit ist unser Design gerademal ca 80x65x110mm groß.
