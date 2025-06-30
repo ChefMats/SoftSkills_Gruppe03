@@ -2,9 +2,16 @@ Nach vollständiger Bemaßung (Bemaßungen finden Sie am Ende) aller Teile, konn
 Die Idee war den Ring als Gesicht des Smart Air Buddys zu verwenden. Das bedeutet die Form des Ringes muss im Druck berücksichtigt werden.
 Außerdem ist eine Bohrung für den Knopf notwendig, damit dieser gut platziert werden kann und einfach zu finden ist.
 
+Der Hauptteil des Designs ist der Große Körper des Smart Air Buddys, welcher auch die Hülle für sämtliche 
+Elektronik dient. Um diese Hülle zu schließen, wurde eine "Tür" gestaltet, welche die Elektronik schützen und verbergen soll.
+Hier wurde das Scharnier so geslatet, dass die Tür in 2 Bohrungslöcher im Smart Air Buddy passt, welche dann
+nur noch eingehakt werden muss.
+
 Die Sensoren sollten im besten Fall eine Öffnung zur freien Luft haben, damit diese höhere Genauigkeiten beim Messen erzielen.
 Daher wurde an der "Tür" Material weggelassen, um den Sensor Raum nach Außen zu gestatten.
 Ähnliches haben wir für den Luftfeuchtigkeitssensor vor.
+
+
 
 Einige Kanten und Ecken wurden aus funktionalen, sowohl als auch optischen Gründen gefast.
 
