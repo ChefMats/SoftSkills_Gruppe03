@@ -11,7 +11,11 @@ void setup() {
   pinMode(BUTTON_PIN, INPUT_PULLUP);
 
   initializeLeds();
+  
+  initializeSensors();
+
   connectWiFi();
+
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
 }
 
