@@ -5,7 +5,7 @@
 // WLAN-Zugangsdaten
 // ------------------------
 const char* ssid = "SSID";
-const char* password = "PASSWORT";
+const char* password = "PASS";
 
 // ------------------------
 // Wetterdaten
