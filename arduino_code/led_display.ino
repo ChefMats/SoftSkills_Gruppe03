@@ -1,42 +1,38 @@
 #include <Adafruit_NeoPixel.h>
 
-#define PIN D1
+#define LED_PIN D1
 #define NUMPIXELS 12
+#define HALF_RING (NUMPIXELS / 2)
 
-Adafruit_NeoPixel ring(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 
-const uint32_t CO2_COLOR = ring.Color(100, 0, 0);
-const uint32_t HUMIDITY_COLOR = ring.Color(0, 0, 100);
+uint32_t CO2_COLOR;
+uint32_t HUMIDITY_COLOR;
 
-void initializeLeds(){
+void initializeLeds() {
   ring.begin();
-  ring.show(); // turn all leds off initially
+  ring.clear();
+  ring.show();
+  CO2_COLOR = ring.Color(100, 0, 0);      // Rot für CO2
+  HUMIDITY_COLOR = ring.Color(0, 0, 100); // Blau für Luftfeuchtigkeit
 }
 
-void displayCO2 (float value){
-  int ledsToShow = value; // TODO: translate here from value (CO2 concentration) to leds (how many should turn on)
+void updateLeds(float co2, float humidity) {
+  ring.clear();
 
-  if (ledsToShow > NUMPIXELS / 2) {
-    ledsToShow = NUMPIXELS / 2;
-  }
-  
-  for (int i = 0; i < ledsToShow; i++) {
+  // CO₂ → LEDs 0–5
+  int co2Leds = map((int)co2, 40, 200, 0, HALF_RING);
+  co2Leds = constrain(co2Leds, 0, HALF_RING);
+  for (int i = 0; i < co2Leds; i++) {
     ring.setPixelColor(i, CO2_COLOR);
   }
 
-  ring.show();
-}
-
-void displayHumidity (float value){
-  int ledsToShow = value; // TODO: translate here from value (humidity) to leds (how many should turn on)
-
-  if (ledsToShow > NUMPIXELS / 2) {
-    ledsToShow = NUMPIXELS / 2;
-  }
-  
-  for (int i = NUMPIXELS - 1; i > NUMPIXELS - ledsToShow - 1; i--) {
+  // Luftfeuchtigkeit → LEDs 6–11
+  int humLeds = map((int)humidity, 0, 100, 0, HALF_RING);
+  humLeds = constrain(humLeds, 0, HALF_RING);
+  for (int i = NUMPIXELS - 1; i >= NUMPIXELS - humLeds; i--) {
     ring.setPixelColor(i, HUMIDITY_COLOR);
   }
 
-  ring.show();
+ring.show();
 }
