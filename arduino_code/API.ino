@@ -29,9 +29,9 @@ void fetchWeatherData() {
       int humidity = doc["main"]["humidity"];
       const char* weatherDesc = doc["weather"][0]["description"];
 
-      Serial.print("Temperatur: ");
+      Serial.print("DraußenTemperatur: ");
       Serial.print(tempC);
-      Serial.print(" °C | Feuchtigkeit: ");
+      Serial.print(" °C | DraußenFeuchtigkeit: ");
       Serial.print(humidity);
       Serial.print(" % | Wetter: ");
       Serial.println(weatherDesc);
