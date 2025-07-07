@@ -24,6 +24,7 @@ void loop() {
     lastMillis = millis();
     Blynk.run();
     fetchWeatherData();
+    printIndoorData();
   }
 
   if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed){
