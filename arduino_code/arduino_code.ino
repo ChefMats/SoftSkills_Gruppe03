@@ -23,13 +23,23 @@ void setup() {
 void loop() {
   unsigned long now = millis();
 
-  if (millis() - lastMillis >= 2000) {
-    lastMillis = millis();
+  if (now - lastMillis >= 2000) {
+    lastMillis = now;
+
     Blynk.run();
-    fetchWeatherData();
-    printIndoorData();
+
+    fetchWeatherData();  // draußen
+    printIndoorData();   // Serielle Ausgabe
+
     ledsetup();
+
     initializeSpeaker();
+
+    // Indoor-Daten auslesen & an Blynk schicken
+    float temp = readTemperature();
+    int humidity = (int)readHumidity();
+    int co2 = (int)readCO2();
+    notifyIndoorData(temp, humidity, co2);
   }
 
   // Button-Status prüfen & toggeln
