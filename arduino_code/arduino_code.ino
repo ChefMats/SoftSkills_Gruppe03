@@ -28,9 +28,9 @@ void loop() {
   }
 
   float co2 = readCO2();
-  if (co2 > 1200 && (now - lastAlertMillis >= 10000)) {
+  if (co2 > 850 && (now - lastAlertMillis >= 5000)) {
     lastAlertMillis = now;
-    Serial.println("CO₂ > 1200ppm — Warnton!");
+    Serial.println("CO₂ > 850ppm — Warnton!");
     playAlert(1000);
   }
 }
