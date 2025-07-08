@@ -74,5 +74,5 @@ void ledsetup() {
   Serial.print(humidity);
   Serial.println(" %");
 
-  updateLeds(co2, humidity);
+  updateLeds(co2, humidity);
 }
