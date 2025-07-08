@@ -9,6 +9,14 @@ Adafruit_NeoPixel ring(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 uint32_t CO2_COLOR;
 uint32_t HUMIDITY_COLOR;
 
+
+void turnOffLeds() {
+  for (int i = 0; i < NUMPIXELS; i++) {
+    ring.setPixelColor(i, 0);  // aus
+  }
+  ring.show();
+}
+
 void initializeLeds() {
   ring.begin();
   ring.clear();

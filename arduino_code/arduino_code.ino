@@ -3,7 +3,9 @@
 #include <BlynkSimpleEsp8266.h>
 
 #define BUTTON_PIN D2
+
 bool buttonIsPressed = false;
+bool ledsEnabled = true;  // LED-Ring anfangs an
 double lastMillis = 0;
 
 void setup() {
@@ -26,20 +28,31 @@ void loop() {
     ledsetup();
   }
 
-  // Button-Status
-  if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed){
+  // Button-Status prüfen & toggeln
+  if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed) {
     buttonIsPressed = true;
-    Serial.println("Button pressed!");
-    delay(200);
+
+    ledsEnabled = !ledsEnabled;  // umschalten
+
+    if (ledsEnabled) {
+      Serial.println("LED-Ring eingeschaltet.");
+    } else {
+      Serial.println("LED-Ring ausgeschaltet.");
+      turnOffLeds();  // LEDs sofort aus
+    }
+
+    delay(200);  // debounce
   }
-  if (digitalRead(BUTTON_PIN) == HIGH && buttonIsPressed){
+
+  if (digitalRead(BUTTON_PIN) == HIGH && buttonIsPressed) {
     buttonIsPressed = false;
-    Serial.println("Button released!");
-    delay(200);
+    delay(200);  // debounce
   }
 }
 
 void ledsetup() {
+  if (!ledsEnabled) return;  // wenn LEDs aus, nichts tun
+
   float co2 = readCO2();
   float humidity = readHumidity();
 
