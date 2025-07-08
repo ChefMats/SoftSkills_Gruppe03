@@ -29,7 +29,7 @@ void updateLeds(float co2, float humidity) {
   ring.clear();
 
   // CO₂ → LEDs 0–5
-  int co2Leds = map((int)co2, 100, 500, 0, HALF_RING);
+  int co2Leds = map((int)co2, 170, 850, 0, HALF_RING);
   co2Leds = constrain(co2Leds, 0, HALF_RING);
   for (int i = 0; i < co2Leds; i++) {
     ring.setPixelColor(i, CO2_COLOR);

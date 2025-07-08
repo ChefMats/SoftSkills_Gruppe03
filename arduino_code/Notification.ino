@@ -1,20 +1,30 @@
 #include "config.h"
 #include <BlynkSimpleEsp8266.h>  
 
-//draußen daten
+// draußen daten
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
   if (humidity > 80 && tempC < 20) {
-    Blynk.logEvent("lueften", "Draußen ist es kühl & feucht – besser nicht lüften.");
+    Blynk.logEvent("outsideluft0", "Draußen ist es kühl & feucht – besser nicht lüften.");
+    Blynk.logEvent("feucht", "Draußen sehr feucht.");
+  } else if (humidity < 40) {
+    Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
+    Blynk.logEvent("trocken", "Draußen sehr trocken.");
   } else if (humidity < 60 && tempC < 24) {
-    Blynk.logEvent("lueften", "Gute Bedingungen zum Lüften!");
+    Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
   } else {
-    Serial.println("Keine Benachrichtigung notwendig.");
+    Serial.println("Keine spezielle Lüftungsbenachrichtigung notwendig.");
   }
 }
 
-// Indoor daten beispiel (später)
-void notifyIndoorData(int co2ppm, int humidityInnen) {
-  if (co2ppm > 1000) {
+// Indoor daten
+void notifyIndoorData(float tempInnen, int humidityInnen, int co2ppm) {
+  // Auf Virtual Pins schreiben
+  Blynk.virtualWrite(V1, (int)tempInnen);
+  Blynk.virtualWrite(V2, (int)humidityInnen);
+  Blynk.virtualWrite(V3, (int)co2ppm);
+
+  // CO₂-Warnung bei 850ppm
+  if (co2ppm > 850) {
     Blynk.logEvent("co2_warnung", "CO₂-Wert ist zu hoch! Bitte lüften.");
   }
 }

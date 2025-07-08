@@ -5,7 +5,7 @@
 #define BUTTON_PIN D2
 
 bool buttonIsPressed = false;
-bool ledsEnabled = true;  // LED-Ring anfangs an
+bool ledsEnabled = true;
 double lastMillis = 0;
 double lastAlertMillis = 0;
 
@@ -23,16 +23,26 @@ void setup() {
 void loop() {
   unsigned long now = millis();
 
-  if (millis() - lastMillis >= 2000) {
-    lastMillis = millis();
+  if (now - lastMillis >= 2000) {
+    lastMillis = now;
+
     Blynk.run();
+
     fetchWeatherData();
     printIndoorData();
+
     ledsetup();
+
     initializeSpeaker();
+
+    // Indoor-Daten auslesen dann an Blynk schicken
+    float temp = readTemperature();
+    int humidity = (int)readHumidity();
+    int co2 = (int)readCO2();
+    notifyIndoorData(temp, humidity, co2);
   }
 
-  // Button-Status prüfen & toggeln
+  // Button Status prüfen
   if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed) {
     buttonIsPressed = true;
 
@@ -63,7 +73,7 @@ void loop() {
 }
 
 void ledsetup() {
-  if (!ledsEnabled) return;  // wenn LEDs aus, nichts tun
+  if (!ledsEnabled) return;
 
   float co2 = readCO2();
   float humidity = readHumidity();
