@@ -4,15 +4,12 @@
 // draußen daten
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
   if (humidity > 80 && tempC < 20) {
-    // zu feucht & kühl → lüften ungünstig
     Blynk.logEvent("outsideluft0", "Draußen ist es kühl & feucht – besser nicht lüften.");
     Blynk.logEvent("feucht", "Draußen sehr feucht.");
   } else if (humidity < 40) {
-    // sehr trocken draußen
     Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
     Blynk.logEvent("trocken", "Draußen sehr trocken.");
   } else if (humidity < 60 && tempC < 24) {
-    // normal & gut zum Lüften
     Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
   } else {
     Serial.println("Keine spezielle Lüftungsbenachrichtigung notwendig.");
@@ -26,8 +23,8 @@ void notifyIndoorData(float tempInnen, int humidityInnen, int co2ppm) {
   Blynk.virtualWrite(V2, (int)humidityInnen);
   Blynk.virtualWrite(V3, (int)co2ppm);
 
-  // CO₂-Warnung bei >1000ppm
-  if (co2ppm > 1000) {
+  // CO₂-Warnung bei 850ppm
+  if (co2ppm > 850) {
     Blynk.logEvent("co2_warnung", "CO₂-Wert ist zu hoch! Bitte lüften.");
   }
 }
