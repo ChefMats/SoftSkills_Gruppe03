@@ -4,26 +4,29 @@
 // draußen daten
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
   if (humidity > 80 && tempC < 20) {
-    Blynk.logEvent("lueften", "Draußen ist es kühl & feucht – besser nicht lüften.");
+    // zu feucht & kühl → lüften ungünstig
+    Blynk.logEvent("outsideluft0", "Draußen ist es kühl & feucht – besser nicht lüften.");
+    Blynk.logEvent("feucht", "Draußen sehr feucht.");
+  } else if (humidity < 40) {
+    // sehr trocken draußen
+    Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
+    Blynk.logEvent("trocken", "Draußen sehr trocken.");
   } else if (humidity < 60 && tempC < 24) {
-    Blynk.logEvent("lueften", "Gute Bedingungen zum Lüften!");
+    // normal & gut zum Lüften
+    Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
   } else {
-    Serial.println("Keine Benachrichtigung notwendig.");
+    Serial.println("Keine spezielle Lüftungsbenachrichtigung notwendig.");
   }
 }
 
 // Indoor daten
 void notifyIndoorData(float tempInnen, int humidityInnen, int co2ppm) {
+  // Auf Virtual Pins schreiben
   Blynk.virtualWrite(V1, (int)tempInnen);
   Blynk.virtualWrite(V2, (int)humidityInnen);
   Blynk.virtualWrite(V3, (int)co2ppm);
 
-  // LogEvents für jeden Wert
-  Blynk.logEvent("tempinside", String("Temperatur innen: ") + String(tempInnen) + " °C");
-  Blynk.logEvent("humidityinside", String("Luftfeuchtigkeit innen: ") + String(humidityInnen) + " %");
-  Blynk.logEvent("co2ppminside", String("CO₂ innen: ") + String(co2ppm) + " ppm");
-
-  // zusätzliche CO₂-Warnung
+  // CO₂-Warnung bei >1000ppm
   if (co2ppm > 1000) {
     Blynk.logEvent("co2_warnung", "CO₂-Wert ist zu hoch! Bitte lüften.");
   }
