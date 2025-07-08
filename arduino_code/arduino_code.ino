@@ -2,40 +2,36 @@
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
-#define BUTTON_PIN D2
-bool buttonIsPressed = false;
 double lastMillis = 0;
+double lastAlertMillis = 0;
 
 void setup() {
   Serial.begin(115200);
-  pinMode(BUTTON_PIN, INPUT_PULLUP);
 
   initializeLeds();
   initializeSensors();
+  initializeSpeaker();
 
   connectWiFi();
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
 }
 
 void loop() {
-  if (millis() - lastMillis >= 2000) {
-    lastMillis = millis();
+  unsigned long now = millis();
+
+  if (now - lastMillis >= 2000) {
+    lastMillis = now;
     Blynk.run();
     fetchWeatherData();
     printIndoorData();
     ledsetup();
   }
 
-  // Button-Status
-  if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed){
-    buttonIsPressed = true;
-    Serial.println("Button pressed!");
-    delay(200);
-  }
-  if (digitalRead(BUTTON_PIN) == HIGH && buttonIsPressed){
-    buttonIsPressed = false;
-    Serial.println("Button released!");
-    delay(200);
+  float co2 = readCO2();
+  if (co2 > 1200 && (now - lastAlertMillis >= 10000)) {
+    lastAlertMillis = now;
+    Serial.println("CO₂ > 1200ppm — Warnton!");
+    playAlert(1000);
   }
 }
 
