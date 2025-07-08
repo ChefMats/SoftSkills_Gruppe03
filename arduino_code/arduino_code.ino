@@ -53,7 +53,6 @@ void loop() {
     delay(200);  // debounce
   }
   
-  
   float co2 = readCO2();
   if (co2 > 850 && (now - lastAlertMillis >= 5000)) {
     lastAlertMillis = now;
@@ -62,8 +61,6 @@ void loop() {
   }
 
 }
-
-
 
 void ledsetup() {
   if (!ledsEnabled) return;  // wenn LEDs aus, nichts tun
@@ -77,5 +74,5 @@ void ledsetup() {
   Serial.print(humidity);
   Serial.println(" %");
 
-  updateLeds(co2, humidity);
+  updateLeds(co2, humidity);
 }
