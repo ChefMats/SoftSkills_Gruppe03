@@ -5,10 +5,6 @@
 void notifyOutsideData(float tempC, int humidity, const char* weatherDesc) {
   if (humidity > 80 && tempC < 20) {
     Blynk.logEvent("outsideluft0", "Draußen ist es kühl & feucht – besser nicht lüften.");
-    Blynk.logEvent("feucht", "Draußen sehr feucht.");
-  } else if (humidity < 40) {
-    Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
-    Blynk.logEvent("trocken", "Draußen sehr trocken.");
   } else if (humidity < 60 && tempC < 24) {
     Blynk.logEvent("outsideluft1", "Gute Bedingungen zum Lüften!");
   } else {
