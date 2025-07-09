@@ -36,7 +36,6 @@ void fetchWeatherData() {
       Serial.print(" % | Wetter: ");
       Serial.println(weatherDesc);
 
-      notifyOutsideData(tempC, humidity, weatherDesc);
     } else {
       Serial.println("JSON Fehler");
     }
