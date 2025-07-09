@@ -6,8 +6,9 @@
 
 bool buttonIsPressed = false;
 bool ledsEnabled = true;
-double lastMillis = 0;
-double lastAlertMillis = 0;
+unsigned long lastMillis = 0;
+unsigned long lastAlertMillis = 0;
+bool blynkEnabled = false;
 
 void setup() {
   Serial.begin(115200);
@@ -17,7 +18,15 @@ void setup() {
   initializeSensors();
 
   connectWiFi();
-  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+
+
+  if (strlen(BLYNK_AUTH_TOKEN) > 0) {
+    Serial.println("Starte Blynk...");
+    Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
+    blynkEnabled = true;
+  } else {
+    Serial.println("Kein Blynk Token konfiguriert – Blynk deaktiviert.");
+  }
 }
 
 void loop() {
@@ -26,27 +35,32 @@ void loop() {
   if (now - lastMillis >= 2000) {
     lastMillis = now;
 
-    Blynk.run();
+    if (blynkEnabled) {
+      Blynk.run();
+    }
 
     fetchWeatherData();
     printIndoorData();
 
     ledsetup();
-
     initializeSpeaker();
 
-    // Indoor-Daten auslesen dann an Blynk schicken
+
     float temp = readTemperature();
     int humidity = (int)readHumidity();
     int co2 = (int)readCO2();
-    notifyIndoorData(temp, humidity, co2);
+
+
+    if (blynkEnabled) {
+      notifyIndoorData(temp, humidity, co2);
+    }
   }
 
   // Button Status prüfen
   if (digitalRead(BUTTON_PIN) == LOW && !buttonIsPressed) {
     buttonIsPressed = true;
 
-    ledsEnabled = !ledsEnabled;  // umschalten
+    ledsEnabled = !ledsEnabled;  // Umschalten
 
     if (ledsEnabled) {
       Serial.println("LED-Ring eingeschaltet.");
@@ -62,14 +76,14 @@ void loop() {
     buttonIsPressed = false;
     delay(200);  // debounce
   }
-  
+
+  // CO₂ Warnung
   float co2 = readCO2();
   if (co2 > 850 && (now - lastAlertMillis >= 5000)) {
     lastAlertMillis = now;
     Serial.println("CO₂ > 850ppm — Warnton!");
     playAlert(1000);
   }
-
 }
 
 void ledsetup() {
@@ -78,9 +92,9 @@ void ledsetup() {
   float co2 = readCO2();
   float humidity = readHumidity();
 
-  Serial.print("CO2: ");
+  Serial.print("CO₂: ");
   Serial.print(co2);
-  Serial.print(" ppm | Humidity: ");
+  Serial.print(" ppm | Feuchtigkeit: ");
   Serial.print(humidity);
   Serial.println(" %");
 

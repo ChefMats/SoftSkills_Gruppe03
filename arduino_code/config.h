@@ -19,6 +19,6 @@ const char* country_code = "de";
 // ------------------------
 #define BLYNK_TEMPLATE_ID "TMPL4E5ra_ND-"
 #define BLYNK_TEMPLATE_NAME "AirBuddy"
-#define BLYNK_AUTH_TOKEN "BLYNK_KEY"
+#define BLYNK_AUTH_TOKEN ""
 
 #endif
