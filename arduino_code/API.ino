@@ -35,8 +35,11 @@ void fetchWeatherData() {
       Serial.print(humidity);
       Serial.print(" % | Wetter: ");
       Serial.println(weatherDesc);
-
+      
+      if (blynkEnabled) {
       notifyOutsideData(tempC, humidity, weatherDesc);
+    }
+
     } else {
       Serial.println("JSON Fehler");
     }
