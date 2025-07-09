@@ -35,12 +35,14 @@ void loop() {
   if (now - lastMillis >= 2000) {
     lastMillis = now;
 
-    fetchWeatherData();
-    printIndoorData();
-      
     if (blynkEnabled) {
       Blynk.run();
     }
+
+    fetchWeatherData();
+
+    printIndoorData();
+      
 
     ledsetup();
     initializeSpeaker();
@@ -53,7 +55,6 @@ void loop() {
 
     if (blynkEnabled) {
       notifyIndoorData(temp, humidity, co2);
-      notifyOutsideData(tempC, humidity, weatherDesc);
     }
   }
 
