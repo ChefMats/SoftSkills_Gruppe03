@@ -1,0 +1,32 @@
+Einrichten:
+
+Lade die Arduino IDE herunter (HIER). Lade den Sourcecode aus dem Github herunter (HIER).
+
+Öffne den Sourcecode mithilfe der IDE.
+
+Füge den ESP8266 hinzu:
+
+Gehe auf File – Preferences und füge unter additional Board Manager diesen Link ein: http://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+Danach installierst du das Board
+
+BoardVerwaltung - esp8266 - installieren
+
+Um das Board auszuwählen gehe auf Tools – Board – Esp8266 – Lolin Wemos D1 R2& mini
+
+Nun fügen wir die essentiellen Bibliotheken hinzu:
+
+Gehe in der IDE auf Sketch, dann Include Library, und dann Manage Librarys.
+
+Hier suchst du nun nach den folgenden Bibliotheken und fügst sie hinzu:
+
+ArduinoJson von Benoit
+Blynk von Volodymyr
+Adafruit_Neopixel von Adafruit
+DHT sensor library von Adafruit
+MQUnifiedsensor von Miguel Califa
+Nun ändere in der Config.h folgende Daten:
+
+Deine Wlan ssid und Passwort. Das Gerät erfordert eine Wlan Verbindung.
+Deinen API Code (kostenlos über OpenWeathermap.org.) und deine Stadt in der URL.
+(Optional) Blynk Code für Handybenachrichtigungen.
